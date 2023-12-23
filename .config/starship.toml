@@ -1,8 +1,13 @@
+# Timeout for commands executed by starship (ms)
+command_timeout = 1000
+
+# newline between commands
+add_newline = true
+
 format = """
 [░▒▓](#a3aed2)\
 (bg:#a3aed2 fg:#090c0c)\
 $os\
-[   ](bg:#9A348e fg:#34be5b)\
 $username\
 $hostname\
 [](bg:#769ff0 fg:#f2930a)\
@@ -31,7 +36,7 @@ disabled = false
 
 [hostname]
 ssh_only = true
-format = "@<[$hostname]($style)>"
+format = "<[$hostname]($style)>"
 #trim_at = "-"
 style = "bold dimmed white"
 disabled = false
@@ -40,8 +45,49 @@ disabled = false
 # represents the current operating system
 [os]
 style = "bg:#9A348E"
-disabled = true # Disabled by default
+disabled = false # Disabled by default
+format = '[$symbol](bg:#9A348e bold white)'
 
+[os.symbols]
+Alpaquita = "  "
+Alpine = "  "
+Amazon = "  "
+Android = "  "
+Arch = "  "
+Artix = "  "
+CentOS = "  "
+Debian = "  "
+DragonFly = "  "
+Emscripten = "  "
+EndeavourOS = "  "
+Fedora = "  "
+FreeBSD = "  "
+Garuda = " 󰛓 "
+Gentoo = "  "
+HardenedBSD = " 󰞌 "
+Illumos = " 󰈸 "
+Linux = "  "
+Mabox = "  "
+Macos = "  "
+Manjaro = "  "
+Mariner = "  "
+MidnightBSD = "  "
+Mint = "  "
+NetBSD = "  "
+NixOS = "  "
+OpenBSD = " 󰈺 "
+openSUSE = "  "
+OracleLinux = " 󰌷 "
+Pop = "  "
+Raspbian = "  "
+Redhat = "  "
+RedHatEnterprise = "  "
+Redox = " 󰀘 "
+Solus = " 󰠳 "
+SUSE = "  "
+Ubuntu = "  "
+Unknown = "  "
+Windows = " 󰍲 "
 
 [directory]
 style = "fg:#e3e5e5 bg:#769ff0"
