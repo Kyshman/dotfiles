@@ -1,7 +1,9 @@
-# Adam's Home Directory Stuff
+# Kysh's Home Directory Stuff
+
+(Dynamic document - Will keep changing as I adapt, change and add)
 
 This repo contains some of the stuff from my home directory on most machines
-(primarily Mac machines) I use.
+(primarily Linux machines) I use.
 
 Included are my basic config files and a bin directory that I typically add to
 my `PATH` with various tools & utilities.
