@@ -1,0 +1,47 @@
+# Setup Starship Prompt
+
+## Install Nerd Fonts
+```bash
+# macos
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
+
+# linux (arch)
+mkdir -p ~/.local/share/fonts
+git clone --filter=blob:none --sparse https://github.com/ryanoasis/nerd-fonts
+cd nerd-fonts/
+git sparse-checkout add patched-fonts/Hack
+cd patched-fonts/Hack/
+find . -name "*.ttf" -exec cp {} ~/.local/share/fonts/ \;
+```
+
+## Install Starship
+```bash
+sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+```
+
+## Copy config
+```bash
+cp starship.toml ~/.config/starship.toml
+```
+
+## Install Shell Color Script
+```bash
+git clone https://gitlab.com/dwt1/shell-color-scripts.git
+cd shell-color-scripts
+sudo make install
+```
+
+## Add to `.bashrc`
+```bash
+# starship
+colorscript -e random # crunch
+eval "$(starship init bash)"
+```
+
+### Further reading
+[Starship](https://starship.rs/guide/#🚀-installation)
+
+[Derek Taylor / Shell Color Scripts · GitLab](https://gitlab.com/dwt1/shell-color-scripts)
+
+[How to get the most out of your Terminal | by Reagan McFarland | Medium](https://reaganmcf.medium.com/how-to-get-the-most-out-of-your-terminal-7af47f7730a3)
