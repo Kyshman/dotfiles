@@ -22,6 +22,8 @@ if status is-interactive
 	#alias pbpaste='xsel --clipboard --output'
 	# Set the BORG-PASSCOMMAND for intergration with keepassxc-cli
 	set -x BORG_PASSCOMMAND "keepassxc-cli show -k '"/home/tony/GDRIVE/Personal Docs/Passport Photos/Tony.jpg"' -a Password '"/home/tony/GDRIVE/Personal Docs/Firefox.kdbx"' '"BorgBase"'"
+	### RANDOM COLOR SCRIPT ###
+	colorscript random
 	starship init fish | source
 end
 
