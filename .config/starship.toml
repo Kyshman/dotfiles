@@ -7,7 +7,7 @@ add_newline = true
 
 format = """
 [](fg:#7DF9AA)\
-[ $os ](bg:#7DF9AA fg:#090c0c)\
+[$os](bg:#7DF9AA)\
 [](fg:#7DF9AA bg:#1C3A5E)\
 $time\
 [](fg:#1C3A5E bg:#314160)\
@@ -41,9 +41,9 @@ disabled = false
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
 [os]
-style = "bg:#9A348E"
+#style = "bg:#9A348E"
 disabled = false # Disabled by default
-format = '[$symbol](bold white)'
+format = '[$symbol](bold)'
 
 [os.symbols]
 Alpaquita = "  "
@@ -65,8 +65,8 @@ HardenedBSD = " 󰞌 "
 Illumos = " 󰈸 "
 Linux = "  "
 Mabox = "  "
-Macos = "  "
-Manjaro = "[](bg:#7DF9AA fg:#34be5b bold)"
+Macos = "[  ](bg:#7DF9AA bold black)"
+Manjaro = "[  ](bg:#7DF9AA fg:#34be5b bold)"
 Mariner = "  "
 MidnightBSD = "  "
 Mint = "  "
