@@ -2,6 +2,9 @@ set -Ux EDITOR /usr/bin/vim
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    	#Set GPG KEYS Variables
+	set -x KEYID 0x3A73F55BE2FDDE73
+	set -x KEYID2 0xF90AC0D6D25085A0
     	# Set the TEMP DIR
     	set -x TEMP_DIR /tmp
     	# Set the LIBVA_DRIVER_NAME=i965 for video encoding and decoding
