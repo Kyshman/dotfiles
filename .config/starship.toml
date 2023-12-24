@@ -6,7 +6,7 @@ command_timeout = 1000
 add_newline = true
 
 format = """
-[](bg:#030B16 fg:#7DF9AA)\
+[](fg:#7DF9AA)\
 [ $os ](bg:#7DF9AA fg:#090c0c)\
 [](fg:#7DF9AA bg:#1C3A5E)\
 $time\
