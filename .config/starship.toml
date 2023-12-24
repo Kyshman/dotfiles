@@ -1,3 +1,4 @@
+#Font to use is Droid Sans Mono Nerd Font Complete Mono found here --> https://eng.m.fontke.com/font/24637081/
 # Timeout for commands executed by starship (ms)
 command_timeout = 1000
 
@@ -5,40 +6,36 @@ command_timeout = 1000
 add_newline = true
 
 format = """
-[░▒▓](#a3aed2)\
-(bg:#a3aed2 fg:#090c0c)\
-$os\
+[](bg:#030B16 fg:#7DF9AA)\
+[ $os ](bg:#7DF9AA fg:#090c0c)\
+[](fg:#7DF9AA bg:#1C3A5E)\
+$time\
+[](fg:#1C3A5E bg:#314160)\
 $username\
 $hostname\
-[](bg:#769ff0 fg:#f2930a)\
+[](fg:#314160 bg:#3B76F0)\
 $directory\
-[](fg:#769ff0 bg:#394260)\
+[](fg:#3B76F0 bg:#FCF392)\
 $git_branch\
 $git_status\
-[](fg:#394260 bg:#212736)\
-$nodejs\
-$rust\
-$golang\
-$php\
-[](fg:#212736 bg:#1d2230)\
-$time\
-[ ](fg:#1d2230)\
+$git_metrics\
+[](fg:#FCF392)\
 \n$character"""
 
 # You can also replace your username with a neat symbol like   or disable this
 # and use the os module below
 [username]
 show_always = true
-style_user = "bold"
+style_user = "bold bg:#314160"
 style_root = "bold bg:#769ff0"
 format = '[$user]($style)'
 disabled = false
 
 [hostname]
 ssh_only = true
-format = "<[$hostname]($style)>"
+format = "[<$hostname>]($style)"
 #trim_at = "-"
-style = "bold dimmed white"
+style = "bold dimmed bg:#314160"
 disabled = false
 
 # An alternative to the username module which displays a symbol that
@@ -46,7 +43,7 @@ disabled = false
 [os]
 style = "bg:#9A348E"
 disabled = false # Disabled by default
-format = '[$symbol](bg:#9A348e bold white)'
+format = '[$symbol](bold white)'
 
 [os.symbols]
 Alpaquita = "  "
@@ -69,7 +66,7 @@ Illumos = " 󰈸 "
 Linux = "  "
 Mabox = "  "
 Macos = "  "
-Manjaro = "  "
+Manjaro = "[](bg:#7DF9AA fg:#34be5b bold)"
 Mariner = "  "
 MidnightBSD = "  "
 Mint = "  "
@@ -90,7 +87,7 @@ Unknown = "  "
 Windows = " 󰍲 "
 
 [directory]
-style = "fg:#e3e5e5 bg:#769ff0"
+style = "fg:#E4E4E4 bg:#3B76F0"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -100,15 +97,22 @@ truncation_symbol = "…/"
 "Downloads" = " "
 "Music" = " "
 "Pictures" = " "
+"Videos" = "󰨜 "
 
 [git_branch]
-symbol = ""
-style = "bg:#394260"
-format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+symbol = " "
+style = "fg:#1C3A5E bg:#FCF392"
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
 
 [git_status]
-style = "bg:#394260"
-format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+style = "fg:#1C3A5E bg:#FCF392"
+format = '[($all_status$ahead_behind )]($style)'
+
+[git_metrics]
+format = "([+$added]($added_style))[]($added_style)"
+added_style = "fg:#1C3A5E bg:#FCF392"
+deleted_style = "fg:bright-red bg:235"
+disabled = false
 
 [nodejs]
 symbol = ""
@@ -134,4 +138,8 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:#1d2230"
-format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
+
+[character]
+success_symbol = " [λ](grey)"
+error_symbol = " [λ](bold red)"
