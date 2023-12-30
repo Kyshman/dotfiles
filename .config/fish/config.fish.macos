@@ -11,7 +11,7 @@ if status is-interactive
 	set -x KEYID2 0xF90AC0D6D25085A0
         # Sync shell across machines
 	#atuin init fish --disable-up-arrow | source
-	atuin init fish | source 
+	atuin init fish | source
 	### RANDOM COLOR SCRIPT ###
 	#colorscript random
 	starship init fish | source

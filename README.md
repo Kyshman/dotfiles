@@ -1,5 +1,7 @@
 # Kysh's Home Directory Stuff
 
+# forked from [pzelnip/dotfiles](https://github.com/pzelnip/dotfiles)
+
 (Dynamic document - Will keep changing as I adapt, change and add)
 
 This repo contains some of the stuff from my home directory on most machines
