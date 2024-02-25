@@ -10,8 +10,7 @@ This repo contains some of the stuff from my home directory on most machines
 Included are my basic config files and a bin directory that I typically add to
 my `PATH` with various tools & utilities.
 
-This was inspired by a number of talks at Polyglot 2013, as well as the
-discussion at:
+This was inspired by the discussion at:
 
 <http://stackoverflow.com/questions/17082038/efficient-way-to-manage-a-git-repository-for-local-config-files>
 
