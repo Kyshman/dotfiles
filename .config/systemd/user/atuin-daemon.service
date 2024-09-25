@@ -1,0 +1,13 @@
+[Unit]
+Description=Atuin Daemon
+After=network.target
+
+[Service]
+#Environment=HOME=%h
+ExecStartPre=/home/tony/bin/atuin-pre-start.sh
+ExecStart=/usr/bin/atuin daemon
+ExecStopPost=/home/tony/bin/atuin-post-stop.sh
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
