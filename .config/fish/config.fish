@@ -28,8 +28,7 @@ if status is-interactive
 	alias wanip='dig @resolver4.opendns.com myip.opendns.com +short' 
 	alias wanip4='dig @resolver4.opendns.com myip.opendns.com +short -4'
 	alias wanip6='dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +short -6'
-	# Set the BORG-PASSCOMMAND for intergration with keepassxc-cli
-	set -x BORG_PASSCOMMAND "keepassxc-cli show -k '"/home/tony/GDRIVE/Personal Docs/Passport Photos/Tony.jpg"' -a Password '"/home/tony/GDRIVE/Personal Docs/Firefox.kdbx"' '"BorgBase"'"
+
 	### RANDOM COLOR SCRIPT ###
 	#colorscript random
 	#starship init fish | source

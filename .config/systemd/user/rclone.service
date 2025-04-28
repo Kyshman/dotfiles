@@ -1,40 +1,40 @@
-# /home/tony/.config/systemd/user/rclone.service
+# $HOME/.config/systemd/user/rclone.service
 # From https://blog.galt.me/how-to-mount-gdrive-in-nextcloud/
+## Speed up fetches & writes
+## https://forum.rclone.org/t/how-to-get-full-directory-tree-cached-on-first-mount/12535/5
 [Unit]
 Description=Google Drive (rclone)
 #Requires=systemd-networkd.service
-AssertPathIsDirectory=/home/tony/GDRIVE
+AssertPathIsDirectory=%h/GDRIVE
 After=network-online.target
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/rclone mount \
-        --config=/home/tony/.config/rclone/rclone.conf \
-	--syslog \
+        --config=%h/.config/rclone/rclone.conf \
+        --syslog \
         --allow-other \
         --cache-tmp-upload-path=/tmp/rclone/upload \
         --cache-chunk-path=/tmp/rclone/chunks \
         --cache-workers=8 \
         --cache-writes \
         --cache-dir=/tmp/rclone/vfs \
-## Speed up fetches & writes
-# https://forum.rclone.org/t/how-to-get-full-directory-tree-cached-on-first-mount/12535/5
-	--vfs-cache-mode writes \
-	--vfs-cache-poll-interval 20m \
-	--vfs-cache-max-age 8760h \
-	--vfs-cache-max-size 1024G \
-	--attr-timeout 8700h \
-	--dir-cache-time 8760h \
-	--poll-interval 30s \
-	--multi-thread-streams 0 \
+        --vfs-cache-mode writes \
+        --vfs-cache-poll-interval 20m \
+        --vfs-cache-max-age 8760h \
+        --vfs-cache-max-size 1024G \
+        --attr-timeout 8700h \
+        --dir-cache-time 8760h \
+        --poll-interval 30s \
+        --multi-thread-streams 0 \
         --cache-db-path=/tmp/rclone/db \
         --no-modtime \
         --drive-use-trash \
         --stats=0 \
         --checkers=16 \
         --bwlimit=40M \
-        --cache-info-age=60m GDRIVE:/ /home/tony/GDRIVE
-ExecStop=/bin/fusermount -u /home/tony/GDRIVE
+        --cache-info-age=60m GDRIVE:/ %h/GDRIVE
+ExecStop=/bin/fusermount -u %h/GDRIVE
 Restart=always
 RestartSec=10
 
