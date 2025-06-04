@@ -25,7 +25,7 @@ ExecStart=/usr/bin/rclone mount \
         --vfs-cache-max-size 1024G \
         --attr-timeout 8700h \
         --dir-cache-time 8760h \
-        --poll-interval 30s \
+        --poll-interval 20m \
         --multi-thread-streams 0 \
         --cache-db-path=/tmp/rclone/db \
         --no-modtime \
@@ -33,7 +33,7 @@ ExecStart=/usr/bin/rclone mount \
         --stats=0 \
         --checkers=16 \
         --bwlimit=40M \
-        --cache-info-age=60m GDRIVE:/ %h/GDRIVE
+        --cache-info-age=120m GDRIVE:/ %h/GDRIVE
 ExecStop=/bin/fusermount -u %h/GDRIVE
 Restart=always
 RestartSec=10
