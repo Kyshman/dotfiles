@@ -38,6 +38,9 @@ eval "$(pyenv init - zsh)"
 # For aliases sess $HOME/.zsh/aliases
 source $HOME/.zsh/aliases
 
+# For functions see $HOME/.zsh/functions
+source $HOME/.zsh/functions
+
 #Atuin for command history
 eval "$(atuin init zsh)"
 
