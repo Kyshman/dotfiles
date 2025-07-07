@@ -11,29 +11,37 @@ After=network-online.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/rclone mount \
-        --config=%h/.config/rclone/rclone.conf \
-        --syslog \
-        --allow-other \
-        --cache-tmp-upload-path=/tmp/rclone/upload \
-        --cache-chunk-path=/tmp/rclone/chunks \
-        --cache-workers=8 \
-        --cache-writes \
-        --cache-dir=/tmp/rclone/vfs \
-        --vfs-cache-mode writes \
-        --vfs-cache-poll-interval 20m \
-        --vfs-cache-max-age 8760h \
-        --vfs-cache-max-size 1024G \
-        --attr-timeout 8700h \
-        --dir-cache-time 8760h \
-        --poll-interval 20m \
-        --multi-thread-streams 0 \
-        --cache-db-path=/tmp/rclone/db \
-        --no-modtime \
-        --drive-use-trash \
-        --stats=0 \
-        --checkers=16 \
-        --bwlimit=40M \
-        --cache-info-age=120m GDRIVE:/ %h/GDRIVE
+    --config=%h/.config/rclone/rclone.conf \
+    --syslog \
+    --allow-other \
+    \
+    # VFS Cache Settings \
+    --vfs-cache-mode writes \
+    #--cache-dir /tmp/rclone/vfs \
+    --vfs-cache-max-age 8760h \
+    --vfs-cache-max-size 1024G \
+    --vfs-read-chunk-size 128M \
+    --vfs-read-chunk-size-limit 1G \
+    \
+    # Directory and Attribute Caching \
+    --attr-timeout 8760h \
+    --dir-cache-time 8760h \
+    \
+    # Polling \
+    --poll-interval 20m \
+    \
+    # Performance and Transfer Tuning \
+    --buffer-size 32M \
+    --use-mmap \
+    --checkers=16 \
+    --timeout 1h \
+    --bwlimit=40M \
+    \
+    # Google Drive Specific (if applicable, otherwise remove or adjust) \
+    --drive-chunk-size 16M \
+    --drive-use-trash \
+    \
+    GDRIVE:/ %h/GDRIVE
 ExecStop=/bin/fusermount -u %h/GDRIVE
 Restart=always
 RestartSec=10
