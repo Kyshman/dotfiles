@@ -1,6 +1,9 @@
 # Set initial Working Diretory
 cd /tmp
 
+# Initialize nvm environment for the shell
+source /usr/share/nvm/init-nvm.sh
+
 # Disable Bracketed Paste Mode
 #bind 'set enable-bracketed-paste off'
 # Enable AUTO_PUSHD: This option automatically pushes the current directory to the stack whenever you use cd.
