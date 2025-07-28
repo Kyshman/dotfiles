@@ -33,8 +33,6 @@ alias wanip='dig @resolver4.opendns.com myip.opendns.com +short'
 alias wanip4='dig @resolver4.opendns.com myip.opendns.com +short -4'
 alias wanip6='dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +short -6'
 
-alias -g scpresume='rsync -aAvXPh --rsh=ssh'
-alias -g ll='ls -lash --color=never'
 alias -g open='xdg-open'
 alias moshj='$HOME/Documents/Scripts/mosh-with-jump/mosh-with-jump'
 alias aria2c-bt='aria2c --bt-tracker=$(curl -s -L https://trackerslist.com/best_aria2.txt)'
