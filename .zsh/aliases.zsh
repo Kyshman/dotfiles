@@ -10,10 +10,21 @@ alias -g vi='/usr/bin/vim'
 #alias pbcopy='xsel --clipboard --input'
 #alias pbpaste='xsel --clipboard --output'
 
-# To overide kiity#s ssh change of behaviour
+## other common aliases
+#cp='cp -i'
+#df='df -h'
+#edit-in-kitty='kitten edit-in-kitty'
+#free='free -m'
+#gitu='git add . && git commit && git push'
+#ls='ls $LS_OPTIONS'
+#run-help=man
+#ssh='kitty +kitten ssh'
+#which-command=whence
+
+# To overide kiity's ssh change of behaviour
 alias -g sshn='/usr/bin/ssh'
 
-# Copy & Paste like on macos (2 versions) on Wayland
+# Copy & Paste like on macos on Wayland
 alias -g pbcopy='wl-copy'
 alias -g pbpaste='wl-paste'
 

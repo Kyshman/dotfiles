@@ -39,10 +39,10 @@ eval "$(pyenv init - zsh)"
 # Restart your shell for the changes to take effect.
 
 # For aliases sess $HOME/.zsh/aliases
-source $HOME/.zsh/aliases
+source $HOME/.zsh/aliases.zsh
 
 # For functions see $HOME/.zsh/functions
-source $HOME/.zsh/functions
+source $HOME/.zsh/functions.zsh
 
 #Atuin for command history
 eval "$(atuin init zsh)"
