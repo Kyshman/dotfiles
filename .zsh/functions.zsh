@@ -14,9 +14,5 @@ scpresume() {
 
 # Shortcut to list all properties of a dir or file
 ll () {
-  #
-  #
-  #
-
   ls -lash "$@"
 }

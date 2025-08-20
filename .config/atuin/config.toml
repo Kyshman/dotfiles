@@ -127,6 +127,12 @@ exit_mode = "return-query"
 # This applies for new installs. Old installs will keep the old behaviour unless configured otherwise.
 enter_accept = true
 
+## Command Chaining
+## Atuin version: >= 18.8
+## Default: false
+## Allows building a command chain with the && or || operator. When enabled, opening atuin will search for the next command in the chain, and append to the current buffer.
+command_chaining = true
+
 #[stats]
 # Set commands where we should consider the subcommand for statistics. Eg, kubectl get vs just kubectl
 common_subcommands = [
