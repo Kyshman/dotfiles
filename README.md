@@ -15,11 +15,11 @@ Contents:
 Usage:
 To install your dotfiles on a new system, or migrate to this setup
 
-1.   `git clone --bare git@github.com:Kyshman/dotfiles.git .cfg`
+1.   `git clone --bare git@github.com:Kyshman/dotfiles.git $HOME/.cfg`
 
 Add a --bare flag if you wish you use a bare repo
 
-2.   `echo ".cfg" >> .gitignore`
+2.   `echo ".cfg" >> $HOME/.gitignore`
 
 There could be weird behaviour if .cfg tries to track itself. Avoid recursive issues by adding .cfg to your global Git ignore. 
 
