@@ -23,7 +23,7 @@ Add a --bare flag if you wish you use a bare repo
 
 There could be weird behaviour if .cfg tries to track itself. Avoid recursive issues by adding .cfg to your global Git ignore. 
 
-3.   `alias config='/usr/bin/git --git-dir=$HOME/.cfg/.git/ --work-tree=$HOME'`
+3.   `alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'`
 
 Set up an alias to send Git commands to .cfg, and also set $HOME as the work tree, while storing the Git state at .cfg
 
