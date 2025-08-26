@@ -43,6 +43,7 @@ E.g if you added $HOME/.zsh/aliases to .cfg, that file will be instantiated at t
 
 
 ###NB:
+
 `config checkout` might fail with a message like:
 
 Files on your computer might have identical locations and names to files in the .cfg repo. Git doesn’t want to overwrite your local files.
@@ -53,5 +54,5 @@ Run `config checkout` again until you don’t get any errors.
 
 Your dotfile setup is complete!
 
-Treat your dotfile management system is like any other Git project. Just use the config alias to add, commit, push and pull.
+Treat your dotfile management system like any other Git project. Just use the `config` alias to add, commit, push and pull.
 
