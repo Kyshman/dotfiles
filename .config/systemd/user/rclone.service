@@ -14,6 +14,9 @@ ExecStart=/usr/bin/rclone mount \
     --config=%h/.config/rclone/rclone.conf \
     --syslog \
     --allow-other \
+    # Enable Remote Control in Your Mount Command for Targeted Refresh of files \
+    --rc \
+    --rc-addr 127.0.0.1:5572 \
     \
     # VFS Cache Settings \
     --vfs-cache-mode writes \
@@ -38,6 +41,8 @@ ExecStart=/usr/bin/rclone mount \
     --bwlimit=40M \
     \
     # Google Drive Specific (if applicable, otherwise remove or adjust) \
+    # To solve malware/abuse error of googleapi "Error 403: This file has been identified as malware or spam and cannot be downloaded., cannotDownloadAbusiveFile" \
+    --drive-acknowledge-abuse \
     --drive-chunk-size 16M \
     --drive-use-trash \
     \

@@ -5,8 +5,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Set initial Working Diretory
-cd /tmp
+# Set initial Working Directory
+# Only cd to /tmp if we're starting from home directory
+if [ "$PWD" = "$HOME" ]; then
+    cd /tmp
+fi
+#cd /tmp
 
 # Initialize nvm environment for the shell
 source /usr/share/nvm/init-nvm.sh
@@ -74,11 +78,14 @@ export KEYID3=0x1BD62C041D620688
 # Set the TEMP DIR
 export TEMP_DIR=/tmp
 
+# PATHS
+# To ensure your PATH entries are unique and automatically exported
+typeset -U path
 # To append a single path
 # path+=('/path/to/your/directory')
 #
 # To append multiple paths
-path+=('$HOME/go/bin' '$HOME/Documents/Scripts' '$HOME/Documents/Scripts/urlshorten' '$HOME/.cargo/bin')
+path+=("$HOME/go/bin" "$HOME/Nextcloud/Computer-650_G2/Documents/Scripts" "$HOME/.cargo/bin")
 #
 
 # Enable access to libvirt system instances and resources as a normal user
@@ -106,6 +113,12 @@ zstyle ':completion:*' completer _complete _ignored _aliases
 
 # Detect & compensate for kitty uncompatible SSH sessions
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
+# Disable focus reporting escape sequences
+if [[ -n "$KITTY_INSTALLATION_DIR" ]]; then
+    bindkey -r '^[[I' # Unbinds Focus In (^[[I)
+    bindkey -r '^[[O' # Unbinds Focus Out (^[[O)
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
