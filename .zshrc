@@ -95,6 +95,9 @@ export LIBVIRT_DEFAULT_URI='qemu:///system'
 # Export the PATH variable for it to be available to all child processes
 export PATH
 
+# Autoload `zargs` to for safer efficient handling of wildcards and globbing
+autoload -Uz zargs
+
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f $HOME/.dart-cli-completion/zsh-config.zsh ]] && . $HOME/.dart-cli-completion/zsh-config.zsh || true
