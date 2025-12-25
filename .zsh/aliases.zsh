@@ -35,6 +35,6 @@ alias wanip6='dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +sho
 
 alias -g open='xdg-open'
 alias moshj='$HOME/Documents/Scripts/mosh-with-jump/mosh-with-jump'
-alias aria2c-bt='aria2c --bt-tracker=$(curl -s -L https://trackerslist.com/best_aria2.txt)'
+alias aria2c-bt='aria2c --dht-entry-point=router.bittorrent.com:6881 --dht-entry-point=dht.transmissionbt.com:6881 --dht-entry-point=router.utorrent.com:6881 --bt-tracker=$(curl -s -L https://trackerslist.com/best_aria2.txt)'
 alias -g ping_ct='ping -O4'
 
