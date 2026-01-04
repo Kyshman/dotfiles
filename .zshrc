@@ -23,7 +23,7 @@ setopt AUTO_PUSHD
 # Enable completion of aliases
 setopt COMPLETE_ALIASES
 
-# Use powerline
+# To use powerline
 #USE_POWERLINE="true"
 # Has weird character width
 # Example:
@@ -54,9 +54,6 @@ source $HOME/.zsh/aliases.zsh
 
 # For functions see $HOME/.zsh/functions
 source $HOME/.zsh/functions.zsh
-
-#Atuin for command history
-eval "$(atuin init zsh)"
 
 # SSH with Yubikey
 export GPG_TTY="$(tty)"
@@ -101,18 +98,20 @@ autoload -Uz zargs
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f $HOME/.dart-cli-completion/zsh-config.zsh ]] && . $HOME/.dart-cli-completion/zsh-config.zsh || true
-## [/Completion]
+source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o default -C /usr/bin/ipinfo ipinfo
+#autoload -U +X bashcompinit && bashcompinit
+#complete -o default -C /usr/bin/ipinfo ipinfo
 
 ## Anpther auto completion section
-autoload -U compinit
-compinit
+#autoload -U compinit
+#compinit
 
 #Enable completion for aliases:
 # zstyle ':completion:*:aliases' regular 1
 zstyle ':completion:*' completer _complete _ignored _aliases
+
+## [/Completion]
 
 # Detect & compensate for kitty uncompatible SSH sessions
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
@@ -123,5 +122,11 @@ if [[ -n "$KITTY_INSTALLATION_DIR" ]]; then
     bindkey -r '^[[O' # Unbinds Focus Out (^[[O)
 fi
 
+# Initialize zoxide
+eval "$(zoxide init zsh)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#Atuin for command history
+eval "$(atuin init zsh)"
