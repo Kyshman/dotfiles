@@ -98,14 +98,14 @@ autoload -Uz zargs
 ## [Completion]
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f $HOME/.dart-cli-completion/zsh-config.zsh ]] && . $HOME/.dart-cli-completion/zsh-config.zsh || true
-source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+#source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 #autoload -U +X bashcompinit && bashcompinit
 #complete -o default -C /usr/bin/ipinfo ipinfo
 
 ## Anpther auto completion section
-#autoload -U compinit
-#compinit
+autoload -Uz compinit
+compinit
 
 #Enable completion for aliases:
 # zstyle ':completion:*:aliases' regular 1

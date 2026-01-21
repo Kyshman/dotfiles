@@ -38,3 +38,6 @@ alias moshj='$HOME/Documents/Scripts/mosh-with-jump/mosh-with-jump'
 alias aria2c-bt='aria2c --dht-entry-point=router.bittorrent.com:6881 --dht-entry-point=dht.transmissionbt.com:6881 --dht-entry-point=router.utorrent.com:6881 --bt-tracker=$(curl -s -L https://trackerslist.com/best_aria2.txt)'
 alias -g ping_ct='ping -O4'
 
+# Deal with orphaned packages
+alias -g orphans='pacman -Qdt --color=always'
+alias -g orphan-clean='sudo pacman -Rnsuv $(pacman -Qdtq)'
