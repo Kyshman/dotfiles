@@ -1,0 +1,19 @@
+[http]
+	lowSpeedLimit = 0
+	lowSpeedTime = 999999
+	postBuffer = 524288000
+[https]
+	lowSpeedLimit = 0
+	lowSpeedTime = 999999
+[fetch]
+	retries = 5
+[user]
+	signingkey = 1BD62C041D620688
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+[difftool "meld"]
+	cmd = meld \"$LOCAL\" \"$REMOTE\"
+[merge]
+	tool = meld
