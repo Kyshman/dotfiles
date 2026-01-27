@@ -55,6 +55,12 @@ source $HOME/.zsh/aliases.zsh
 # For functions see $HOME/.zsh/functions
 source $HOME/.zsh/functions.zsh
 
+# History configuration
+setopt HIST_IGNORE_SPACE      # Ignore commands starting with space
+setopt HIST_IGNORE_DUPS       # Ignore immediate duplicates
+setopt HIST_SAVE_NO_DUPS      # Don't save duplicates to file
+setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicates first when trimming
+
 # SSH with Yubikey
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
