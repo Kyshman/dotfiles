@@ -1,58 +1,103 @@
-Dotfiles Repository
-=======
+# Dotfiles Repository
 
-This `--bare` repository contains my personal dotfiles for configuring and customizing my development environment across various systems. It includes configuration files for shell environments, text editors, version control systems, and other essential tools I use on a daily basis.
+This is a bare Git repository containing my personal dotfiles for configuring and customizing my development environment across various systems. It includes configuration files for shell environments, text editors, version control systems, and other essential tools I use on a daily basis.
 
 The goal of this repository is to keep my setup portable, easily accessible, and reproducible, allowing me to quickly set up new machines or restore my configuration across environments.
 
-Contents:
+## Contents
+
 - Shell configuration (bashrc, zshrc, etc.)
 - Vim/Neovim configuration (.vimrc, .config/nvim/*)
 - Git configuration (.gitconfig, .gitignore_global)
 - Tmux, Kitty, and other tool configurations
 - System-wide configurations that can be personalized
 
-Usage:
-To install your dotfiles on a new system, or migrate to this setup
+## Installation & Setup
 
-1.   `git clone --bare git@github.com:Kyshman/dotfiles.git $HOME/.cfg`
+To install these dotfiles on a new system or migrate to this setup:
 
-Add a --bare flag if you wish you use a bare repo
+### 1. Clone the bare repository
+```bash
+git clone --bare git@github.com:Kyshman/dotfiles.git $HOME/.cfg
+```
 
-2.   `echo ".cfg" >> $HOME/.gitignore`
+### 2. Add `.cfg` to your global Git ignore
+```bash
+echo ".cfg" >> $HOME/.gitignore
+```
+This prevents recursive issues when `.cfg` tries to track itself.
 
-There could be weird behaviour if .cfg tries to track itself. Avoid recursive issues by adding .cfg to your global Git ignore. 
+### 3. Set up the management alias
+```bash
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+```
+Add this to your shell configuration file (`~/.bashrc`, `~/.zshrc`, etc.) to persist it.
 
-3.   `alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'`
+### 4. Configure to ignore untracked files
+```bash
+config config --local status.showUntrackedFiles no
+```
 
-Set up an alias to send Git commands to .cfg, and also set $HOME as the work tree, while storing the Git state at .cfg
+### 5. Checkout the actual content
+```bash
+config checkout
+```
+This pulls tracked files from the repository into your home directory.
 
-For a bare repo, the path to the Git directory is at the top level of the project: $HOME/.cfg/
+**Note:** `config checkout` might fail if files with identical names already exist. Back up important files and delete or move conflicting ones, then run the command again until it completes successfully.
 
-For a non-bare default repo, the path to the Git directory is inside a .git subdirectory: $HOME/.cfg/.git
+## Using the Repository
 
-4.   `config config --local status.showUntrackedFiles no`
+### Basic Operations
+Use the `config` alias for all repository operations:
+```bash
+config status
+config add .zshrc
+config commit -m "Update zsh configuration"
+config push
+```
 
-Set a local configuration in .cfg to ignore untracked files.
+### Creating a `.git` File for Compatibility
+Some Git tools (like `nlgc` for commit message generation) expect a standard `.git` directory or file. Create a `.git` file in your home directory for compatibility:
 
-5.   `config checkout`
+```bash
+echo "gitdir: $HOME/.cfg" > ~/.git
+```
 
-Checkout the actual content from your .cfg repository to $HOME. Git pulls the tracked files out of the compressed database in the Git directory and places them in the work tree.
+This file acts as a pointer to your actual repository and enables compatibility with tools that use standard Git repository discovery.
 
-E.g if you added $HOME/.zsh/aliases to .cfg, that file will be instantiated at that path on your new computer. Ta Da!
+### Using Git Tools with the Bare Repository
+For tools that don't automatically detect your repository configuration:
 
+```bash
+# From your home directory
+cd ~
+GIT_WORK_TREE=. nlgc  # or other Git tools
+```
 
-###NB:
+You can create an alias for convenience:
+```bash
+# Add to your shell configuration
+alias nlgc-dotfiles='cd ~ && GIT_WORK_TREE=. nlgc'
+```
 
-`config checkout` might fail with a message like:
+## Repository Structure
 
-Files on your computer might have identical locations and names to files in the .cfg repo. Git doesn’t want to overwrite your local files.
+- **Bare Repository Location:** `~/.cfg/` (contains all Git internals directly)
+- **Work Tree:** `~` (your entire home directory)
+- **Git Pointer:** `~/.git` (optional file pointing to `~/.cfg`)
 
-Back up the files if they’re useful, delete them if they aren’t.
+This setup uses a bare repository to avoid having a `.git` directory in your home folder while still allowing version control of your entire configuration.
 
-Run `config checkout` again until you don’t get any errors.
+## Notes
 
-Your dotfile setup is complete!
+- Your dotfiles setup is complete! Treat your dotfile management system like any other Git project using the `config` alias.
+- The repository is configured as `core.bare=true`, meaning `~/.cfg` contains the complete Git database without a working directory attached.
+- The work tree is explicitly set to `$HOME` when using the `config` alias.
+- The `.git` file in your home directory is a standard Git feature for pointing to an external repository location.
 
-Treat your dotfile management system like any other Git project. Just use the `config` alias to add, commit, push and pull.
+## Troubleshooting
 
+- **Error: "fatal: this operation must be run in a work tree"**: Ensure you're using the `config` alias or have set `GIT_WORK_TREE` when running standard `git` commands.
+- **Error: "Failed to find git repository root"**: Create the `.git` file as described above or use `GIT_WORK_TREE=.` when running commands from `~`.
+- **Files not showing up in status**: Remember to set `status.showUntrackedFiles no` to avoid cluttering status with unrelated files.
