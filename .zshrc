@@ -113,9 +113,8 @@ autoload -Uz zargs
 #source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 #autoload -U +X bashcompinit && bashcompinit
-#complete -o default -C /usr/bin/ipinfo ipinfo
 
-## Anpther auto completion section
+## Another auto completion section
 autoload -Uz compinit
 compinit
 
@@ -145,3 +144,5 @@ eval "$(atuin init zsh)"
 
 #AI command generation
 [ -f /home/tony/.shelloracle.zsh ] && source /home/tony/.shelloracle.zsh
+autoload -U +X bashcompinit && bashcompinit
+complete -o default -C /usr/local/bin/mmdbctl mmdbctl
