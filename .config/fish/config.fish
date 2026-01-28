@@ -35,3 +35,5 @@ if status is-interactive
 end
 
 #test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+
+if test -f /home/tony/.shelloracle.fish; source /home/tony/.shelloracle.fish; end

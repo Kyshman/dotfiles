@@ -136,3 +136,6 @@ eval "$(zoxide init zsh)"
 
 #Atuin for command history
 eval "$(atuin init zsh)"
+
+#AI command generation
+[ -f /home/tony/.shelloracle.zsh ] && source /home/tony/.shelloracle.zsh
