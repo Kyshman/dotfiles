@@ -53,7 +53,13 @@ eval "$(pyenv init - zsh)"
 source $HOME/.zsh/aliases.zsh
 
 # For functions see $HOME/.zsh/functions
-source $HOME/.zsh/functions.zsh
+#source $HOME/.zsh/functions.zsh
+
+# Add your custom functions dir to fpath
+fpath=(~/.zsh/functions $fpath)
+
+# Autoload all functions (they’ll be loaded on first use)
+autoload -Uz ~/.zsh/functions/*(.N:t)
 
 # History configuration
 setopt HIST_IGNORE_SPACE      # Ignore commands starting with space

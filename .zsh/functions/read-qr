@@ -1,0 +1,66 @@
+read-qr() {
+    local tmpfile pid
+
+    # Create a secure temp file with .png extension
+    if tmpfile="$(mktemp --suffix=.png 2>/dev/null)"; then
+        :
+    elif tmpfile="$(mktemp -t read-qr.XXXXXX 2>/dev/null)"; then
+        tmpfile="$tmpfile.png"
+    else
+        tmpfile="${TMPDIR:-/tmp}/screencapture.$$"
+        [[ "${tmpfile##*/}" != *.png ]] && tmpfile="${tmpfile}.png"
+    fi
+
+    # Ensure cleanup on exit/interrupt
+    trap 'rm -f -- "$tmpfile" >/dev/null 2>&1' EXIT INT TERM
+
+    # Verify dependencies
+    command -v spectacle >/dev/null || { echo "Error: spectacle not found" >&2; return 1; }
+    command -v zbarimg   >/dev/null || { echo "Error: zbarimg not found" >&2;   return 1; }
+
+    # Remove stale file (in case of reuse)
+    rm -f -- "$tmpfile"
+
+    print ">>> Select a region in Spectacle, then click 'Save' or press Enter in the editor."
+    print ">>> Waiting for you to save the image...\n"
+
+    # Launch Spectacle in background
+    spectacle --delay 5000 --background --region --output "$tmpfile" &
+    pid=$!
+
+    # Wait for non-empty file OR Spectacle exit
+    while [[ ! -s "$tmpfile" ]]; do
+        sleep 0.5
+        # If Spectacle exited, abort
+        if ! kill -0 "$pid" 2>/dev/null; then
+            echo "Spectacle closed without saving." >&2
+            return 1
+        fi
+    done
+
+    # Decode QR code
+    local result
+    result=$(zbarimg -q --raw "$tmpfile" 2>/dev/null)
+
+    # Secure cleanup
+    if command -v shred >/dev/null; then
+        shred -u "$tmpfile" >/dev/null 2>&1 || rm -f -- "$tmpfile"
+    else
+        rm -f -- "$tmpfile"
+    fi
+
+    # Disable traps
+    trap - EXIT INT TERM
+
+    # Output result (like original function)
+    if [[ -n "$result" ]]; then
+        # Optional: copy to clipboard (Wayland)
+        if command -v wl-copy >/dev/null; then
+            print -r -- "$result" | wl-copy
+        fi
+        print -r -- "$result"
+    else
+        echo "No QR code detected." >&2
+        return 1
+    fi
+}
