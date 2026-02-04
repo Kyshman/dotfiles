@@ -1,3 +1,8 @@
+# Performance optimizations
+DISABLE_AUTO_UPDATE="true"
+DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_COMPFIX="true"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -11,6 +16,18 @@ if [ "$PWD" = "$HOME" ]; then
     cd /tmp
 fi
 #cd /tmp
+
+# Carefully ordered plugins (syntax highlighting must be last)
+plugins=(
+  git
+#  zsh-autosuggestions
+#  zsh-syntax-highlighting
+)
+
+# Autosuggest settings
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#663399,standout"
+#ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+#ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Initialize nvm environment for the shell
 source /usr/share/nvm/init-nvm.sh
@@ -29,6 +46,7 @@ setopt COMPLETE_ALIASES
 # Example:
 #    is not a diamond
 HAS_WIDECHARS="false"
+
 # Source manjaro-zsh-configuration
 if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
   source /usr/share/zsh/manjaro-zsh-config
@@ -48,18 +66,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - zsh)"
 
 # Restart your shell for the changes to take effect.
-
-# For aliases sess $HOME/.zsh/aliases
-source $HOME/.zsh/aliases.zsh
-
-# For functions see $HOME/.zsh/functions
-#source $HOME/.zsh/functions.zsh
-
-# Add your custom functions dir to fpath
-fpath=(~/.zsh/functions $fpath)
-
-# Autoload all functions (they’ll be loaded on first use)
-autoload -Uz ~/.zsh/functions/*(.N:t)
 
 # History configuration
 setopt HIST_IGNORE_SPACE      # Ignore commands starting with space
@@ -141,6 +147,19 @@ eval "$(zoxide init zsh)"
 
 #Atuin for command history
 eval "$(atuin init zsh)"
+
+## Slow stuff goes here (Processed last)
+# For aliases sess $HOME/.zsh/aliases
+source $HOME/.zsh/aliases.zsh
+
+# For functions see $HOME/.zsh/functions
+#source $HOME/.zsh/functions.zsh
+
+# Add your custom functions dir to fpath
+fpath=(~/.zsh/functions $fpath)
+
+# Autoload all functions (they’ll be loaded on first use)
+autoload -Uz ~/.zsh/functions/*(.N:t)
 
 #AI command generation
 [ -f /home/tony/.shelloracle.zsh ] && source /home/tony/.shelloracle.zsh
