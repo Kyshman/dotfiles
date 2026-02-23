@@ -1,4 +1,12 @@
 # Shortcut to list all properties of a dir or file
+#ll () {
+#  ls -lash "$@"
+#}
+# With full time and date
+#ll () {
+#  ls -lash --time-style=long-iso "$@"
+#}
+# With lsd (Modern ls with a lot of pretty colors and awesome icons)
 ll () {
-  ls -lash "$@"
+  lsd --long --all --human-readable --inode "$@"
 }
