@@ -34,8 +34,13 @@ alias wanip4='dig @resolver4.opendns.com myip.opendns.com +short -4'
 alias wanip6='dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +short -6'
 
 alias -g open='xdg-open'
+<<<<<<< Updated upstream
 alias moshj='bash $HOME/Documents/Scripts/mosh-with-jump/mosh-with-jump'
 alias aria2c-bt='aria2c --dht-entry-point=router.bittorrent.com:6881 --dht-entry-point=dht.transmissionbt.com:6881 --dht-entry-point=router.utorrent.com:6881 --bt-tracker=$(curl -s -L https://trackerslist.com/best_aria2.txt)'
+=======
+alias moshj='$HOME/Documents/Scripts/mosh-with-jump/mosh-with-jump'
+alias aria2c-bt='aria2c --dht-entry-point=router.bittorrent.com:6881 --dht-entry-point=dht.transmissionbt.com:6881 --dht-entry-point=router.utorrent.com:6881 --bt-tracker=$(curl -s -L https://trackerslist.com/best_aria2.txt) --truncate-console-readout=false --summary-interval=300 --check-integrity --console-log-level=warn --seed-ratio=1.0'
+>>>>>>> Stashed changes
 alias -g ping_ct='ping -O4'
 
 # Deal with orphaned packages

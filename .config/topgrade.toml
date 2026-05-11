@@ -146,7 +146,7 @@ pre_sudo = false
 # Arch Package Manager to use.
 # Allowed values:
 #   autodetect, aura, garuda_update, pacman, pamac, paru, pikaur, trizen, yay
- arch_package_manager = "pamac"
+ arch_package_manager = "pacman"
 
 # Arguments to pass yay (or paru) when updating packages
  yay_arguments = "--nodevel"

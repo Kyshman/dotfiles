@@ -148,6 +148,7 @@ eval "$(zoxide init zsh)"
 #Atuin for command history
 eval "$(atuin init zsh)"
 
+<<<<<<< Updated upstream
 ## Slow stuff goes here (Processed last)
 # For aliases sess $HOME/.zsh/aliases
 source $HOME/.zsh/aliases.zsh
@@ -165,3 +166,10 @@ autoload -Uz ~/.zsh/functions/*(.N:t)
 [ -f /home/tony/.shelloracle.zsh ] && source /home/tony/.shelloracle.zsh
 autoload -U +X bashcompinit && bashcompinit
 complete -o default -C /usr/local/bin/mmdbctl mmdbctl
+=======
+# Created by `pipx` on 2026-05-09 12:01:52
+eval "$(register-python-argcomplete pipx)"
+export PATH="$PATH:/home/tony/.local/bin"
+
+[ -f /home/tony/.shelloracle.zsh ] && source /home/tony/.shelloracle.zsh
+>>>>>>> Stashed changes
