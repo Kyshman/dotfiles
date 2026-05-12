@@ -1,7 +1,7 @@
 # Git alias for working with dotfiles (See https://www.ackama.com/articles/the-best-way-to-store-your-dotfiles-a-bare-git-repository-explained/)
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-alias -g vi='/usr/bin/vim'
+#alias -g vi='/usr/bin/vim'
 
 # Carried Over from fish
 # Copy & Paste like on macos (2 versions) on X11
