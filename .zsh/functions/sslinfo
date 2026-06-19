@@ -1,0 +1,74 @@
+sslinfo() {
+  # Argument validation
+  local domain="${1:?Usage: sslinfo <domain> [port]}"
+  local port="${2:-443}"
+  local cert_pem not_after_gmt local_time os_type
+
+  # Fetch certificate PEM (only the server cert, not intermediates)
+  cert_pem=$(openssl s_client -servername "$domain" -connect "$domain:$port" -quiet 2>/dev/null <<<'Q' | \
+             sed -n '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/p')
+
+  if [[ -z "$cert_pem" ]]; then
+    echo "❌ Failed to retrieve certificate for $domain:$port" >&2
+    return 1
+  fi
+
+  # Header
+  printf "🔍 Certificate Details for: %s:%s\n\n" "$domain" "$port"
+
+  # Subject Alternative Names (SAN)
+  printf "✅ Subject Alternative Names (SAN):\n"
+  if ! echo "$cert_pem" | openssl x509 -noout -ext subjectAltName 2>/dev/null | \
+     tail -n +2 | sed 's/^[[:space:]]*//; s/, */\n/g' | sed '/^$/d'; then
+    printf "  ⚠️  None found (certificate may only cover Common Name)\n"
+  fi
+  printf "\n"
+
+  # Expiry date (GMT/UTC)
+  not_after_gmt=$(echo "$cert_pem" | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2)
+  printf "⏰ Expiry Date:\n"
+  printf "  GMT/UTC : %s\n" "$not_after_gmt"
+
+  # Convert to local timezone
+  os_type="${OSTYPE:-$(uname -s | tr '[:upper:]' '[:lower:]')}"
+  if (( $+commands[gdate] )); then
+    # GNU date (Linux or macOS with coreutils)
+    local_time=$(gdate -d "$not_after_gmt" 2>/dev/null +'%Y-%m-%d %H:%M:%S %Z (%z)')
+  elif [[ "$os_type" == *darwin* || "$os_type" == *bsd* ]]; then
+    # macOS/BSD date (handle OpenSSL's inconsistent spacing: "Jul  4" vs "Jul 14")
+    local normalized_date
+    normalized_date=$(echo "$not_after_gmt" | sed 's/  / /; s/ GMT$//')
+    local_time=$(date -j -f "%b %d %H:%M:%S %Y" "$normalized_date" +'%Y-%m-%d %H:%M:%S %Z (%z)' 2>/dev/null)
+  else
+    # Linux date
+    local_time=$(date -d "$not_after_gmt" 2>/dev/null +'%Y-%m-%d %H:%M:%S %Z (%z)')
+  fi
+
+  if [[ -n "$local_time" ]]; then
+    printf "  Your TZ : %s\n" "$local_time"
+  else
+    printf "  Your TZ : ⚠️  Conversion failed (install GNU coreutils: brew install coreutils)\n"
+  fi
+
+  # Days remaining
+  local expiry_epoch now_epoch days_left
+  if (( $+commands[gdate] )); then
+    expiry_epoch=$(gdate -d "$not_after_gmt" +%s 2>/dev/null)
+  elif [[ "$os_type" == *darwin* || "$os_type" == *bsd* ]]; then
+    local normalized_date
+    normalized_date=$(echo "$not_after_gmt" | sed 's/  / /; s/ GMT$//')
+    expiry_epoch=$(date -j -f "%b %d %H:%M:%S %Y" "$normalized_date" +%s 2>/dev/null)
+  else
+    expiry_epoch=$(date -d "$not_after_gmt" +%s 2>/dev/null)
+  fi
+
+  if [[ -n "$expiry_epoch" ]]; then
+    now_epoch=$(date +%s)
+    days_left=$(( (expiry_epoch - now_epoch) / 86400 ))
+    printf "  Days left: %d%s\n" "$days_left" $(( days_left < 30 ? " ⚠️  (expires soon!)" : "" ))
+  fi
+
+  printf "\nℹ️  Tip: Install GNU coreutils for reliable date conversion:\n"
+  printf "     macOS: brew install coreutils\n"
+  printf "     Linux: sudo apt install coreutils  # usually pre-installed\n"
+}

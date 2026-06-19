@@ -1,0 +1,6 @@
+ytdlp-open() {
+local url="$1"
+local fn
+fn="$(yt-dlp -o '%(title)s.%(ext)s' --get-filename "$url")" || return
+yt-dlp -o '%(title)s.%(ext)s' "$url" && xdg-open "$fn"
+}
